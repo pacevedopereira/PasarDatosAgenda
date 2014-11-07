@@ -4,42 +4,21 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 
 
-public class Activity1 extends Activity {
+public class Activity2 extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_activity1);
-
-        Button añadir = (Button)findViewById(R.id.botonAñadir);
-        añadir.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //código a ejecutar cuando lo pulse
-
-                EditText editText = (EditText)findViewById(R.id.editText);
-                String nombreIntroducido = editText.getText().toString();
-                EditText editText2 = (EditText)findViewById(R.id.editText2);
-                String telefonoIntroducido = editText2.getText().toString();
-
-
-
-
-            }
-        });
+        setContentView(R.layout.activity_activity2);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
-
-        getMenuInflater().inflate(R.menu.menu_activity1, menu);
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_activity2, menu);
         return true;
     }
 
