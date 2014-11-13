@@ -6,5 +6,8 @@
     <string name="action_settings">Settings</string>
     <string name="etiquetaNombre">Nombre</string>
     <string name="title_activity_activity2">Activity2</string>
+    <string name="toastNoNombre">Introduzca nombre, por favor</string>
+    <string name="toastNoTelef">Introduzca teléfono, por favor</string>
+    <string name="toastPersonaAñadida">Contacto añadido correctamente</string>
 
 </resources>

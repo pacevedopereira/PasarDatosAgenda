@@ -22,10 +22,10 @@ public class Activity1 extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity1);
 
-        Button botonAñadir = (Button)findViewById(R.id.botonAñadir);
+        final Button botonAñadir = (Button)findViewById(R.id.botonAñadir);
         final Button botonEditar = (Button)findViewById(R.id.botonEditar);
-        final EditText editNombre = (EditText)findViewById(R.id.editText);
-        final EditText editTelef = (EditText)findViewById(R.id.editText2);
+        final EditText editNombre = (EditText)findViewById(R.id.editText3);//revisar esto, los nombres
+        final EditText editTelef = (EditText)findViewById(R.id.editText2);//revisatr esto
 
         final ArrayList<Persona> Agenda = new ArrayList<Persona>();
 
@@ -67,10 +67,37 @@ public class Activity1 extends Activity {
 
 
 
-                //Intent intent = new Intent(Activity1.this,Activity2.class);
-                //intent.putExtra("agenda",);
+                Intent intent1 = new Intent(Activity1.this,Activity2.class);
+                Bundle datoAgenda = new Bundle();
+                //datoAgenda.putCharSequenceArray("contacto",Agenda.get().getNombre().toString());
+
+                //intent1.putExtra("agenda",);
                 //startActivity(intent);
 
+
+
+            }
+        });
+
+        botonEditar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //String nombre = editNombre.getText().toString();
+
+                //vamos a buscar en el ArrayList
+                for(int i=0; i<Agenda.size(); i++){
+
+                    String buscaNombre = Agenda.get(i).getNombre();
+                    String nomb = editNombre.getText().toString();
+
+                    if(nomb.equalsIgnoreCase(buscaNombre)){
+                        Log.d("Nombre: "+ i+" " + Agenda.get(i).getNombre().toString(), " Teléfono: " + Agenda.get(i).getTelefono().toString());
+
+                        break;
+                    }
+                }
+                //vamos a buscar en el ArrayList
 
 
             }
