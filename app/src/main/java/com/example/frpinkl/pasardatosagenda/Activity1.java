@@ -17,6 +17,8 @@ import java.util.ArrayList;
 
 public class Activity1 extends Activity {
 
+
+    final ArrayList<Persona> Agenda = new ArrayList<Persona>();//para que lo coja en toda la clase
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,10 +26,11 @@ public class Activity1 extends Activity {
 
         final Button botonAñadir = (Button)findViewById(R.id.botonAñadir);
         final Button botonEditar = (Button)findViewById(R.id.botonEditar);
-        final EditText editNombre = (EditText)findViewById(R.id.editText3);//revisar esto, los nombres
-        final EditText editTelef = (EditText)findViewById(R.id.editText2);//revisatr esto
+        final EditText introNombre = (EditText)findViewById(R.id.introNombre);//revisar esto, los nombres
+        final EditText introTelef = (EditText)findViewById(R.id.introTelef);//revisatr esto
+        final EditText buscarNombre = (EditText)findViewById(R.id.buscarNombre);
 
-        final ArrayList<Persona> Agenda = new ArrayList<Persona>();
+
 
 
         botonAñadir.setOnClickListener(new View.OnClickListener() {
@@ -35,33 +38,35 @@ public class Activity1 extends Activity {
             public void onClick(View v) {
                 //código a ejecutar cuando lo pulse
 
-                EditText editNombre = (EditText)findViewById(R.id.editText);
-                String nombreIntroducido = editNombre.getText().toString();
-                EditText editTelef = (EditText)findViewById(R.id.editText2);
-                String telefonoIntroducido = editTelef.getText().toString();
+                EditText introNombre = (EditText)findViewById(R.id.introNombre);
+                String nombreIntroducido = introNombre.getText().toString();
+                EditText introTelef = (EditText)findViewById(R.id.introTelef);
+                String telefonoIntroducido = introTelef.getText().toString();
 
-                if ("".equals(editNombre.getText().toString().trim())){
+                if ("".equals(introNombre.getText().toString().trim())){
                     CharSequence msg = getResources().getString(R.string.toastNoNombre);
                     //mostrar toast
                     showToast(getResources().getString(R.string.toastNoNombre));
                     return;
                 }
-                if ("".equals(editTelef.getText().toString().trim())){
+                if ("".equals(introTelef.getText().toString().trim())){
                     CharSequence msg = getResources().getString(R.string.toastNoTelef);
                     //mostrar toast
                     showToast(getResources().getString(R.string.toastNoTelef));
                     return;
                 }
 
-                if (editNombre.getText() != null && editTelef.getText() != null){
-                    Agenda.add(new Persona(editNombre.getText().toString(), editTelef.getText().toString()));
+                if (introNombre.getText() != null && introTelef.getText() != null){
+                    Agenda.add(new Persona(introNombre.getText().toString(), introTelef.getText().toString()));
                     CharSequence msg = getResources().getString(R.string.toastPersonaAñadida);
                     //mostrar toast
                     showToast(getResources().getString(R.string.toastPersonaAñadida));
-                    for (int i=0; i<Agenda.size(); i++){
+                    /*for (int i=0; i<Agenda.size(); i++){
                         Log.d("Nombre: "+ i+" " + Agenda.get(i).getNombre().toString(), " Teléfono: " + Agenda.get(i).getTelefono().toString());
 
-                    }
+                    }*/
+                    Log.d("Nombre: "+ (Agenda.size()-1)+" " + Agenda.get(Agenda.size()-1).getNombre().toString(), " Teléfono: " + Agenda.get(Agenda.size()-1).getTelefono().toString());
+
                     return;
                 }
 
@@ -89,21 +94,39 @@ public class Activity1 extends Activity {
                 for(int i=0; i<Agenda.size(); i++){
 
                     String buscaNombre = Agenda.get(i).getNombre();
-                    String nomb = editNombre.getText().toString();
+                    String nomb = buscarNombre.getText().toString();
 
                     if(nomb.equalsIgnoreCase(buscaNombre)){
-                        Log.d("Nombre: "+ i+" " + Agenda.get(i).getNombre().toString(), " Teléfono: " + Agenda.get(i).getTelefono().toString());
+
+                        Intent intento = new Intent(Activity1.this,Activity2.class);
+                        intento.putExtra("nombrePersona", Agenda.get(i).getNombre().toString());
+                        intento.putExtra("telefonoPersona", Agenda.get(i).getTelefono().toString());
+                        intento.putExtra("posicion", i);
+
+                        startActivityForResult(intento,1);//este 1 es para referenciarel intento CONTODO DENTRO
+
+
+                        Log.d("Nombre: " + i + " " + Agenda.get(i).getNombre().toString(), " Teléfono: " + Agenda.get(i).getTelefono().toString());
 
                         break;
                     }
                 }
-                //vamos a buscar en el ArrayList
+
 
 
             }
         });
     }
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        Agenda.get(data.getExtras().getInt("nuevaPos")).setNombre(data.getExtras().getString("nuevoNombre"));
+        Agenda.get(data.getExtras().getInt("nuevaPos")).setTelefono(data.getExtras().getString("nuevoTelef"));
+
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
