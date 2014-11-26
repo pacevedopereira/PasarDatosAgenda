@@ -30,10 +30,14 @@ public class Lista extends ListActivity implements Serializable{
         setContentView(R.layout.activity_lista);
 
         Intent intento = getIntent();
-        ArrayList <Persona> Agenda = (ArrayList<Persona>)intento.getSerializableExtra("agend");
+        /**ArrayList <Persona>**/ Agenda = (ArrayList<Persona>)intento.getSerializableExtra("agend");
 
         //configurar el adaptador
         setListAdapter(new ArrayAdapter<Persona>(this, android.R.layout.simple_list_item_1,Agenda));
+
+        setResult(RESULT_OK, intento); //ponerlo siempre que pueda volver atrás y modificar el array porque si no al volver a listar se encuentra con dos arraylists diferentesy rompe
+
+
     }
 
 
@@ -44,7 +48,7 @@ public class Lista extends ListActivity implements Serializable{
             String nomb = Agenda.get(position).toString();
 
 
-            if(nomb.equalsIgnoreCase(buscaNombre)) {
+      /*      if(nomb.equalsIgnoreCase(buscaNombre)) {
 
                 Intent intento = new Intent(Lista.this, Activity2.class);
                 intento.putExtra("agend", Agenda);
@@ -55,7 +59,8 @@ public class Lista extends ListActivity implements Serializable{
                 //Log.d("Nombre: " + i + " " + Agenda.get(i).getNombre().toString(), " Teléfono: " + Agenda.get(i).getTelefono().toString());
 
                 break;
-            }}
+            }  */
+        }
 
 
     }

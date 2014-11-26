@@ -12,23 +12,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Activity1 extends Activity {
+public class Activity1 extends Activity implements Serializable{
 
 
-    final ArrayList<Persona> Agenda = new ArrayList<Persona>();//para que lo coja en toda la clase
+    ArrayList<Persona> Agenda = new ArrayList<Persona>();//para que lo coja en toda la clase
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity1);
 
         final Button botonAñadir = (Button)findViewById(R.id.botonAñadir);
-        final Button botonEditar = (Button)findViewById(R.id.botonEditar);
+        final Button botonVerLista = (Button)findViewById(R.id.botonVerLista);
         final EditText introNombre = (EditText)findViewById(R.id.introNombre);//revisar esto, los nombres
         final EditText introTelef = (EditText)findViewById(R.id.introTelef);//revisatr esto
-        final EditText buscarNombre = (EditText)findViewById(R.id.buscarNombre);
+        //final EditText buscarNombre = (EditText)findViewById(R.id.buscarNombre);
 
 
 
@@ -38,10 +39,10 @@ public class Activity1 extends Activity {
             public void onClick(View v) {
                 //código a ejecutar cuando lo pulse
 
-                EditText introNombre = (EditText)findViewById(R.id.introNombre);
-                String nombreIntroducido = introNombre.getText().toString();
-                EditText introTelef = (EditText)findViewById(R.id.introTelef);
-                String telefonoIntroducido = introTelef.getText().toString();
+                //EditText introNombre = (EditText)findViewById(R.id.introNombre);
+                //String nombreIntroducido = introNombre.getText().toString();
+                //EditText introTelef = (EditText)findViewById(R.id.introTelef);
+                //String telefonoIntroducido = introTelef.getText().toString();
 
                 if ("".equals(introNombre.getText().toString().trim())){
                     CharSequence msg = getResources().getString(R.string.toastNoNombre);
@@ -84,14 +85,14 @@ public class Activity1 extends Activity {
             }
         });
 
-        botonEditar.setOnClickListener(new View.OnClickListener() {
+        botonVerLista.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 //String nombre = editNombre.getText().toString();
 
                 //vamos a buscar en el ArrayList
-                for(int i=0; i<Agenda.size(); i++){
+              /*  for(int i=0; i<Agenda.size(); i++){
 
                     String buscaNombre = Agenda.get(i).getNombre();
                     String nomb = buscarNombre.getText().toString();
@@ -111,6 +112,16 @@ public class Activity1 extends Activity {
                         break;
                     }
                 }
+                */
+
+
+
+                Intent intento = new Intent(Activity1.this, Lista.class);
+                intento.putExtra("agend",Agenda);
+                startActivityForResult(intento,1);
+
+
+
 
 
 
@@ -123,9 +134,16 @@ public class Activity1 extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        Agenda.get(data.getExtras().getInt("nuevaPos")).setNombre(data.getExtras().getString("nuevoNombre"));
-        Agenda.get(data.getExtras().getInt("nuevaPos")).setTelefono(data.getExtras().getString("nuevoTelef"));
+        //Agenda.get(data.getExtras().getInt("nuevaPos")).setNombre(data.getExtras().getString("nuevoNombre"));
+        //Agenda.get(data.getExtras().getInt("nuevaPos")).setTelefono(data.getExtras().getString("nuevoTelef"));
 
+        //Intent intento= getIntent();
+
+        if (requestCode == 1 && resultCode == RESULT_OK){
+            Agenda = (ArrayList<Persona>)data.getSerializableExtra("agend");
+
+
+        }
     }
 
     @Override
