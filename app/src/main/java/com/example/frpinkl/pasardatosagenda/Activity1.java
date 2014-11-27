@@ -73,8 +73,8 @@ public class Activity1 extends Activity implements Serializable{
 
 
 
-                Intent intent1 = new Intent(Activity1.this,Activity2.class);
-                Bundle datoAgenda = new Bundle();
+                //Intent intent1 = new Intent(Activity1.this,Activity2.class);
+                //Bundle datoAgenda = new Bundle();
                 //datoAgenda.putCharSequenceArray("contacto",Agenda.get().getNombre().toString());
 
                 //intent1.putExtra("agenda",);
@@ -139,8 +139,10 @@ public class Activity1 extends Activity implements Serializable{
 
         //Intent intento= getIntent();
 
-        if (requestCode == 1 && resultCode == RESULT_OK){
-            Agenda = (ArrayList<Persona>)data.getSerializableExtra("agend");
+        if (requestCode==1 && resultCode==RESULT_OK){
+
+
+            Agenda = (ArrayList<Persona>) data.getSerializableExtra("agend");
 
 
         }

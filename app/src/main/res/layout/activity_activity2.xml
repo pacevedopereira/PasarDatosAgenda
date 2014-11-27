@@ -22,7 +22,7 @@
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
+        android:id="@+id/nombreActivity2"
         android:hint="Introducir nombre"/>
 
     <TextView
@@ -37,14 +37,14 @@
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/editText2"
+        android:id="@+id/telefonoActivity2"
         android:hint="Introducir teléfono"/>
 
     <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Ok"
-        android:id="@+id/botonOk" />
+        android:text="Editar"
+        android:id="@+id/botonEditar" />
 
 
 </LinearLayout>

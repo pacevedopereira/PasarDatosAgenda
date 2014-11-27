@@ -9,5 +9,6 @@
     <string name="toastNoNombre">Introduzca nombre, por favor</string>
     <string name="toastNoTelef">Introduzca teléfono, por favor</string>
     <string name="toastPersonaAñadida">Contacto añadido correctamente</string>
+    <string name="title_activity_lista">Lista</string>
 
 </resources>

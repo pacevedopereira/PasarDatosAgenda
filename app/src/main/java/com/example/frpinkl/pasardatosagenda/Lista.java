@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,7 +21,7 @@ public class Lista extends ListActivity implements Serializable{
     //Intent intento = getIntent();
     ArrayList <Persona> Agenda = new ArrayList<Persona>();
 
-   // ArrayList <Persona> Agenda = (ArrayList<Persona>)intento.getSerializableExtra("agend");
+   //ArrayList <Persona> Agenda = (ArrayList<Persona>)intento.getSerializableExtra("agend");
 
 
 
@@ -30,8 +31,9 @@ public class Lista extends ListActivity implements Serializable{
         setContentView(R.layout.activity_lista);
 
         Intent intento = getIntent();
-        /**ArrayList <Persona>**/ Agenda = (ArrayList<Persona>)intento.getSerializableExtra("agend");
+        Agenda = (ArrayList<Persona>)intento.getSerializableExtra("agend");
 
+        /**ArrayList <Persona>**/
         //configurar el adaptador
         setListAdapter(new ArrayAdapter<Persona>(this, android.R.layout.simple_list_item_1,Agenda));
 
@@ -42,13 +44,14 @@ public class Lista extends ListActivity implements Serializable{
 
 
     public void onListItemClick(ListView parent, View v, int position, long id){
-        for(int i=0; i<Agenda.size(); i++) {
+     /*   for(int i=0; i<Agenda.size(); i++) {
 
-            String buscaNombre = Agenda.get(i).getNombre();
+
+            //String buscaNombre = Agenda.get(i).getNombre();
             String nomb = Agenda.get(position).toString();
 
 
-      /*      if(nomb.equalsIgnoreCase(buscaNombre)) {
+            if(nomb.equalsIgnoreCase(buscaNombre)) {
 
                 Intent intento = new Intent(Lista.this, Activity2.class);
                 intento.putExtra("agend", Agenda);
@@ -59,13 +62,40 @@ public class Lista extends ListActivity implements Serializable{
                 //Log.d("Nombre: " + i + " " + Agenda.get(i).getNombre().toString(), " Teléfono: " + Agenda.get(i).getTelefono().toString());
 
                 break;
-            }  */
-        }
+            }
+
+        }*/
+
+        Persona persona = Agenda.get(position);
+        Intent intento = new Intent(Lista.this, Activity2.class);
+
+        intento.putExtra("agend", Agenda);
+        intento.putExtra("positio", position);
+        startActivityForResult(intento,1);
+        finish();
 
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode==1 && resultCode==RESULT_OK){
+            int posicion = (Integer)data.getSerializableExtra("nuevaPos");
+            Persona p = (Persona) data.getSerializableExtra("person");
 
+            Log.d("Persona",""+p.toString());
+            Agenda.set(posicion,p);
+            setResult(RESULT_OK);
+
+            Intent intento = new Intent(Lista.this, Activity1.class);
+            intento.putExtra("agend", Agenda);
+            setResult(RESULT_OK,intento);
+
+            finish();
+
+
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -1,13 +1,16 @@
 package com.example.frpinkl.pasardatosagenda;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by frpinkl on 07/11/2014.
  */
-public class Persona{
+public class Persona implements Serializable{
 
     private String nombre;
     private String telefono;
@@ -32,7 +35,7 @@ public class Persona{
      //   }
    // }
 
-    public Persona buscarPersona(Persona p, ArrayList<Persona> Agenda)
+   /* public Persona buscarPersona(Persona p, ArrayList<Persona> Agenda)
     {
         for (int i=0; i<Agenda.size(); i++)
         {
@@ -43,7 +46,7 @@ public class Persona{
             }
         }
         return  p;
-    }
+    }*/
 
 
 
@@ -63,6 +66,10 @@ public class Persona{
         this.telefono = telefono;
     }
 
+    //para intentar mostrar la lista del array. no es parte del proyecto inicial
+public String toString(){
+    return "Nombre: "+getNombre()+"\nTeléfono: "+getTelefono();
+}
 
 
 }
