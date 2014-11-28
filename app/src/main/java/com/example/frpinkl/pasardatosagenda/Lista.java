@@ -72,7 +72,7 @@ public class Lista extends ListActivity implements Serializable{
         intento.putExtra("agend", Agenda);
         intento.putExtra("positio", position);
         startActivityForResult(intento,1);
-        finish();
+
 
 
     }
