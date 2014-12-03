@@ -44,6 +44,7 @@ public class Activity1 extends Activity implements Serializable{
                 //EditText introTelef = (EditText)findViewById(R.id.introTelef);
                 //String telefonoIntroducido = introTelef.getText().toString();
 
+                //asdfasdf
                 if ("".equals(introNombre.getText().toString().trim())){
                     CharSequence msg = getResources().getString(R.string.toastNoNombre);
                     //mostrar toast
