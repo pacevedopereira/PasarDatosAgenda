@@ -31,7 +31,7 @@ public class Activity1 extends Activity implements Serializable{
         final EditText introTelef = (EditText)findViewById(R.id.introTelef);//revisatr esto
         //final EditText buscarNombre = (EditText)findViewById(R.id.buscarNombre);
 
-
+        //comentario para hacer el commit del examen. App lista para corregir
 
 
         botonAñadir.setOnClickListener(new View.OnClickListener() {
