@@ -40,11 +40,23 @@
         android:id="@+id/telefonoActivity2"
         android:hint="Introducir teléfono"/>
 
-    <Button
+   <!--
+   comentado para hacer el borrado de la agenda a lo cutre
+   <Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Editar"
-        android:id="@+id/botonEditar" />
+        android:id="@+id/botonEditar" />-->
+
+    <Space
+        android:layout_width="fill_parent"
+        android:layout_height="50px" />
+
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Borrar"
+        android:id="@+id/botonBorrar" />
 
 
 </LinearLayout>

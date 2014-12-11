@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 
@@ -17,6 +18,7 @@ public class Activity2 extends Activity {
     EditText etNombreActivity2;
     EditText etTelefonoActivity2;
     Button boBotoneditar;
+    Button boBotonBorrar;
     ArrayList<Persona> Agenda = new ArrayList<Persona>();
     int pos;
 
@@ -37,7 +39,11 @@ public class Activity2 extends Activity {
 //        final EditText nombreActivity2 = (EditText)findViewById(R.id.nombreActivity2);
 //        final EditText telefonoActivity2 = (EditText)findViewById(R.id.telefonoActivity2);
 
-        boBotoneditar = (Button)findViewById(R.id.botonEditar);
+
+        //comentado examen, descomentar después
+       // boBotoneditar = (Button)findViewById(R.id.botonEditar);
+        boBotonBorrar = (Button)findViewById(R.id.botonBorrar);
+
         etNombreActivity2 = (EditText)findViewById(R.id.nombreActivity2);
         etTelefonoActivity2 = (EditText)findViewById(R.id.telefonoActivity2);
 
@@ -65,6 +71,8 @@ public class Activity2 extends Activity {
         //ahora el evento del botón
         //final Button botonActivity2 = (Button)findViewById(R.id.botonActivity2);
 
+
+        /*//comentado para hacer la opción de borrar a lo cutre
         boBotoneditar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,13 +82,36 @@ public class Activity2 extends Activity {
                 Persona persona = new Persona(newNome, newTelef);
 
                 Intent intento2 = new Intent(Activity2.this, Lista.class);
+
                 intento2.putExtra("person", persona);
                 intento2.putExtra("nuevaPos", pos);
+
                 setResult(RESULT_OK, intento2);
-                finish();
+                finish(); //cuidado!
+            }
+        });*/
+
+        boBotonBorrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                String newNome = ((EditText) findViewById(R.id.nombreActivity2)).getText().toString();
+                String newTelef = ((EditText) findViewById(R.id.telefonoActivity2)).getText().toString();
+
+                Persona persona = new Persona(newNome, newTelef);
+
+                Intent intento2 = new Intent(Activity2.this, Lista.class);
+
+                intento2.putExtra("person", persona);
+                intento2.putExtra("nuevaPos", pos);
+
+                setResult(RESULT_OK, intento2);
+                finish(); //cuidado!
+
+
+
             }
         });
-
 
 
     }

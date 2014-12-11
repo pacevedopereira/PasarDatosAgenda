@@ -66,6 +66,8 @@ public class Lista extends ListActivity implements Serializable{
 
         }*/
 
+
+
         Persona persona = Agenda.get(position);
         Intent intento = new Intent(Lista.this, Activity2.class);
 
@@ -83,8 +85,16 @@ public class Lista extends ListActivity implements Serializable{
             int posicion = (Integer)data.getSerializableExtra("nuevaPos");
             Persona p = (Persona) data.getSerializableExtra("person");
 
+           /* //comentado para hacer la versión cutre del examen
             Log.d("Persona",""+p.toString());
             Agenda.set(posicion,p);
+            setResult(RESULT_OK);
+
+            Intent intento = new Intent(Lista.this, Activity1.class);
+            intento.putExtra("agend", Agenda);
+            setResult(RESULT_OK,intento);*/
+
+            Agenda.remove(posicion);
             setResult(RESULT_OK);
 
             Intent intento = new Intent(Lista.this, Activity1.class);
